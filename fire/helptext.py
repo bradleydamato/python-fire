@@ -66,8 +66,10 @@ def HelpText(component, trace=None, verbose=False):
   actions_grouped_by_kind = _GetActionsGroupedByKind(component, verbose=verbose)
   spec = inspectutils.GetFullArgSpec(component)
   metadata = decorators.GetMetadata(component)
-  is_self_ref_method_flag = len(component.__qualname__) > 1 and 'self' in signature(component).parameters
-
+  try:
+      is_self_ref_method_flag = len(component.__qualname__) > 1 and 'self' in signature(component).parameters
+  except:
+      pass
 
   # Sections:
   name_section = _NameSection(component, info, trace=trace, verbose=verbose)
